@@ -1,0 +1,22 @@
+<p>
+  <strong>Tytuł:</strong>
+  <%= @income.title %>
+  <br>
+
+  <strong>Opis:</strong>
+  <%= @income.text %>
+  <br>
+
+  <strong>Kwota:</strong>
+  <%= number_to_currency(@income.amount, :unit => "zł", :format => "%n %u") %>
+  <br>
+  
+  <strong>Kategoria</strong>
+  <%= Category.find(@income.category_id).name %>
+  <br>
+</p>
+
+<footer>
+<%= link_to 'Edytuj', edit_income_path(@income) %>
+<%= link_to 'Powrót', incomes_path %>
+</footer>

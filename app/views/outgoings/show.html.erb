@@ -1,0 +1,21 @@
+<p>
+  <strong>Tytuł:</strong>
+  <%= @outgoing.title %>
+  <br>
+ 
+  <strong>Treść:</strong>
+  <%= @outgoing.text %>
+  <br>
+
+  <strong>Kwota:</strong>
+  <%= number_to_currency(@outgoing.amount, :unit => "zł", :format => "%n %u") %>
+  <br>
+
+  <strong>Kategoria</strong>
+  <%= Category.find(@outgoing.category_id).name %>
+</p>
+
+<footer>
+<%= link_to 'Edytuj', edit_outgoing_path(@outgoing) %>
+<%= link_to 'Powrót', outgoings_path %>
+</footer>

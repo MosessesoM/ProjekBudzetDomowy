@@ -1,0 +1,9 @@
+<p>
+  <strong>Nazwa:</strong>
+  <%= @category.name %>
+</p>
+
+<footer>
+<%= link_to 'Edytuj', edit_category_path(@category) %>
+<%= link_to 'Powrót', categories_path %>
+</footer>

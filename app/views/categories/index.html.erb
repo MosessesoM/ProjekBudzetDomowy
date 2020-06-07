@@ -1,0 +1,27 @@
+<h1>Lista Kategori</h1>
+
+<h2><%= link_to 'Nowa Kategoria', new_category_path %></h2>
+ 
+<div style="overflow-x:auto;">
+ 
+<table class="center">
+  <tr>
+    <th>Nazwa</th>
+	<th colspan="3"></th>
+  </tr>
+ 
+  <% @categories.each do |category| %>
+    <tr>
+      <td><%= category.name %></td>
+      <td><%= link_to 'Pokaż', category_path(category) %></td>
+	  <td><%= link_to 'Edytuj', edit_category_path(category) %></td>
+	  <td><%= link_to 'Usuń', category_path(category),
+              method: :delete,
+              data: { confirm: 'Czy na pewno chcesz usunąć ten wpis?' } %></td>
+    </tr>
+  <% end %>
+</table>
+
+</div>
+
+<footer><%= link_to 'Strona główna', controller: 'welcome' %></footer>

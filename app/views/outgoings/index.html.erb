@@ -1,0 +1,35 @@
+<h1>Lista Wydatków</h1>
+
+<h2><%= link_to 'Nowy Wydatek', new_outgoing_path %></h2>
+
+<div style="overflow-x:auto;">
+
+<table class="center">
+  <tr>
+    <th><%= sortable "title", "Tytuł" %></th>
+    <th><%= sortable "text", "Opis" %></th>
+    <th><%= sortable "amount", "Kwota" %></th>
+	<th><%= sortable "category_id", "Kategoria" %></th>
+	<th colspan="3"></th>
+  </tr>
+ 
+  <% @outgoings.each do |outgoing| %>
+    <tr>
+      <td><%= outgoing.title %></td>
+      <td><%= outgoing.text %></td>
+	  <td><%= number_to_currency(outgoing.amount, :unit => "zł", :format => "%n %u") %></td>
+	  <td><%= Category.find(outgoing.category_id).name %></td>
+      <td><%= link_to 'Pokaż', outgoing_path(outgoing) %></td>
+	  <td><%= link_to 'Edytuj', edit_outgoing_path(outgoing) %></td>
+	  <td><%= link_to 'Usuń', outgoing_path(outgoing),
+              method: :delete,
+              data: { confirm: 'Czy na pewno chcesz usunąć ten wpis?' } %></td>
+    </tr>
+  <% end %>
+</table>
+
+</div>
+
+<%= pie_chart Outgoing.joins(:category).group(:name).sum(:amount),suffix: " zł", thousands: ",", messages: {empty: "Nie ma wpisów"}, download: {filename: "wykres"}, title: "Podział wydatków na kategorie" %>
+
+<footer><%= link_to 'Strona główna', controller: 'welcome' %></footer>
